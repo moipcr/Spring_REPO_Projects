@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans  
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
+    http://www.springframework.org/schema/aop   
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+    <bean id="passengerDao" class="com.springaop.PassengerDaoImpl"></bean>
+    <bean id="AspectLogging" class="com.springaop.AspectLogging"></bean>
+
+    <aop:config>
+        <aop:aspect id="AspectLogging" ref="AspectLogging">
+        <aop:pointcut id="passengerMethod" expression="execution(* com.springaop.*.*(..))"/> <!-- Todo metodo que coincida con la expresion -->
+            <aop:before method="before" pointcut-ref="passengerMethod"></aop:before>
+            <aop:after method="after" pointcut-ref="passengerMethod"></aop:after>
+        </aop:aspect>
+    </aop:config>
+
+</beans>
